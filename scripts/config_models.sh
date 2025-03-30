@@ -19,12 +19,12 @@ SEQ_LENGTHS=(
     # 65536
     # 57344
     # 49152
-    # 40960
+    40960
     # 32768
     # 24576
     # 16384
     # 8192
-    4096
+    # 4096
 )
 
 MODEL_SELECT() {
@@ -44,6 +44,13 @@ MODEL_SELECT() {
             MODEL_PATH="lmsys/longchat-7b-v1.5-32k"
             MODEL_TEMPLATE_TYPE="base"
             MODEL_FRAMEWORK="longchat_streaming"
+            TOKENIZER_PATH="lmsys/longchat-7b-v1.5-32k"
+            TOKENIZER_TYPE="hf"
+            ;;
+        longchat-7b-32k-ours)
+            MODEL_PATH="lmsys/longchat-7b-v1.5-32k"
+            MODEL_TEMPLATE_TYPE="base"
+            MODEL_FRAMEWORK="longchat_ours"
             TOKENIZER_PATH="lmsys/longchat-7b-v1.5-32k"
             TOKENIZER_TYPE="hf"
             ;;

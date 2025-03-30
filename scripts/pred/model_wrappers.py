@@ -161,7 +161,7 @@ class LongChatModel:
             device_map="auto", 
             torch_dtype=torch.bfloat16,
             attn_implementation="flash_attention_2", 
-            use_cache=False,
+            use_cache=True,
         )
         print("Using self.model = AutoModelForCausalLM.from_pretrained()")
             
@@ -220,6 +220,8 @@ class OurLongChatModel:
         from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 
         self.tokenizer = AutoTokenizer.from_pretrained(name_or_path, trust_remote_code=True)
+        model_kwargs = {"attn_implementation": "flash_attention_2"}
+        print("OurLongChatModel\n")
         self.pipeline = None
         self.model = AutoModelForCausalLM.from_pretrained(
             name_or_path, 
@@ -227,7 +229,7 @@ class OurLongChatModel:
             device_map="auto", 
             torch_dtype=torch.bfloat16,
             attn_implementation="flash_attention_2", 
-            use_cache=False,
+            use_cache=True,
         )
         print("Using self.model = AutoModelForCausalLM.from_pretrained()")
             
@@ -293,7 +295,7 @@ class StreamingLongChatModel:
             device_map="auto", 
             torch_dtype=torch.bfloat16,
             # attn_implementation="flash_attention_2", 
-            use_cache=False,
+            use_cache=True,
         )
         print("Using self.model = AutoModelForCausalLM.from_pretrained()")
             
@@ -310,6 +312,7 @@ class StreamingLongChatModel:
 
     def __call__(self, prompt: str, **kwargs) -> Dict[str, List[str]]:
         from streaming_llm.enable_streaming_llm import enable_streaming_llm
+        from torch.nn.attention import sdpa_kernel, SDPBackend
         recent_size_ratio = float(os.environ.get('RECENT_SIZE_RATIO', 0.5))
         start_size = int(os.environ.get('START_SIZE', 4))
         

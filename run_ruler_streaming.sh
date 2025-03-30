@@ -1,4 +1,6 @@
 bash scripts/run_streaming.sh longchat-7b-32k-streaming synthetic
+bash scripts/run_streaming.sh longchat-7b-32k synthetic
+bash scripts/run_streaming.sh longchat-7b-32k-ours synthetic
 
 # Adjust streaming-llm hyperparameters in scripts/run_streaming.sh:
 # 
